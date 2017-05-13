@@ -13,6 +13,7 @@ add_llvm_library(LLVMCore
   Constants.cpp
   Core.cpp
   DIBuilder.cpp
+  DIBuilderBindings.cpp
   DataLayout.cpp
   DebugInfo.cpp
   DebugInfoMetadata.cpp
@@ -24,6 +25,7 @@ add_llvm_library(LLVMCore
   GCOV.cpp
   GVMaterializer.cpp
   Globals.cpp
+  IRBindings.cpp
   IRBuilder.cpp
   IRPrintingPasses.cpp
   InlineAsm.cpp
