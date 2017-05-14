@@ -74,3 +74,7 @@ void LLVMSetCurrentDebugLocation2(LLVMBuilderRef Bref, unsigned Line,
 void LLVMSetSubprogram(LLVMValueRef Func, LLVMMetadataRef SP) {
   unwrap<Function>(Func)->setSubprogram(unwrap<DISubprogram>(SP));
 }
+
+void LLVMAddModuleFlag(LLVMModuleRef M, ModFlagBehavior behavior, const char *Str, uint32_t Val){
+    unwrap(M)->addModuleFlag(static_cast<llvm::Module::ModFlagBehavior>(behavior), StringRef(Str, strlen(Str)), Val);
+}

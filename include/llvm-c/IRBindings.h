@@ -57,6 +57,47 @@ void LLVMSetCurrentDebugLocation2(LLVMBuilderRef Bref, unsigned Line,
 
 void LLVMSetSubprogram(LLVMValueRef Fn, LLVMMetadataRef SP);
 
+//Added For PolyLLVM (From Module.h)
+
+/// This enumeration defines the supported behaviors of module flags.
+enum ModFlagBehavior {
+    /// Emits an error if two values disagree, otherwise the resulting value is
+    /// that of the operands.
+    Error = 1,
+
+    /// Emits a warning if two values disagree. The result value will be the
+    /// operand for the flag from the first module being linked.
+    Warning = 2,
+
+    /// Adds a requirement that another module flag be present and have a
+    /// specified value after linking is performed. The value must be a metadata
+    /// pair, where the first element of the pair is the ID of the module flag
+    /// to be restricted, and the second element of the pair is the value the
+    /// module flag should be restricted to. This behavior can be used to
+    /// restrict the allowable results (via triggering of an error) of linking
+    /// IDs with the **Override** behavior.
+    Require = 3,
+
+    /// Uses the specified value, regardless of the behavior or value of the
+    /// other module. If both modules specify **Override**, but the values
+    /// differ, an error will be emitted.
+    Override = 4,
+
+    /// Appends the two values, which are required to be metadata nodes.
+    Append = 5,
+
+    /// Appends the two values, which are required to be metadata
+    /// nodes. However, duplicate entries in the second list are dropped
+    /// during the append operation.
+    AppendUnique = 6,
+
+    // Markers:
+    ModFlagBehaviorFirstVal = Error,
+    ModFlagBehaviorLastVal = AppendUnique
+ };
+
+void LLVMAddModuleFlag(LLVMModuleRef M, ModFlagBehavior behavior, const char *Str, uint32_t Val);
+
 #ifdef __cplusplus
 }
 
